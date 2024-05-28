@@ -45,20 +45,16 @@
 //    findPathBFS(graphAdjList, initial, graphSize);
 // }
 
-
-
-
-
-
-
 // C++ program to print all paths of source to
 // destination in given graph
 #include <bits/stdc++.h>
 using namespace std;
+#include <iostream>
+#include <queue>
 
 // utility function for printing
 // the found path in graph
-void printpath(vector<int>& path)
+void printpath(vector<int> &path)
 {
 	int size = path.size();
 	for (int i = 0; i < size; i++)
@@ -68,7 +64,7 @@ void printpath(vector<int>& path)
 
 // utility function to check if current
 // vertex is already present in path
-int isNotVisited(int x, vector<int>& path)
+int isNotVisited(int x, vector<int> &path)
 {
 	int size = path.size();
 	for (int i = 0; i < size; i++)
@@ -79,17 +75,18 @@ int isNotVisited(int x, vector<int>& path)
 
 // utility function for finding paths in graph
 // from source to destination
-void findpaths(vector<vector<int> >& g, int src, int dst,int v)
+void findpaths(vector<vector<int>> &g, int src, int dst, int v)
 {
 	// create a queue which stores
 	// the paths
-	queue<vector<int> > q;
+	queue<vector<int>> q;
 
 	// path vector to store the current path
 	vector<int> path;
 	path.push_back(src);
 	q.push(path);
-	while (!q.empty()) {
+	while (!q.empty())
+	{
 		path = q.front();
 		q.pop();
 		int last = path[path.size() - 1];
@@ -101,8 +98,10 @@ void findpaths(vector<vector<int> >& g, int src, int dst,int v)
 
 		// traverse to all the nodes connected to
 		// current vertex and push new path to queue
-		for (int i = 0; i < g[last].size(); i++) {
-			if (isNotVisited(g[last][i], path)) {
+		for (int i = 0; i < g[last].size(); i++)
+		{
+			if (isNotVisited(g[last][i], path))
+			{
 				vector<int> newpath(path);
 				newpath.push_back(g[last][i]);
 				q.push(newpath);
@@ -114,7 +113,7 @@ void findpaths(vector<vector<int> >& g, int src, int dst,int v)
 // driver program
 int main()
 {
-	vector<vector<int> > g;
+	vector<vector<int>> g;
 	// number of vertices
 	int v = 4;
 	g.resize(4);
@@ -129,7 +128,7 @@ int main()
 
 	int src = 2, dst = 3;
 	cout << "path from src " << src << " to dst " << dst
-		<< " are \n";
+		 << " are \n";
 
 	// function for finding the paths
 	findpaths(g, src, dst, v);
